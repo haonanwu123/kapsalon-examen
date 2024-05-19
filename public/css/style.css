@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.background-olive-green {
+    background-color: rgb(186,184,108);
+}
