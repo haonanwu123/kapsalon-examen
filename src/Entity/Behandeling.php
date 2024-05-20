@@ -20,6 +20,10 @@ class Behandeling
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
+    #[ORM\ManyToOne(inversedBy: 'behandelings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Behandelingobject $behandelingobject = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +49,18 @@ class Behandeling
     public function setPrice(string $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getBehandelingobject(): ?Behandelingobject
+    {
+        return $this->behandelingobject;
+    }
+
+    public function setBehandelingobject(?Behandelingobject $behandelingobject): static
+    {
+        $this->behandelingobject = $behandelingobject;
 
         return $this;
     }

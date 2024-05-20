@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block behandelingobject %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for behandelingobject in behandelingobjects %}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset(behandelingobject.img) }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ behandelingobject.name }}</h5>
+                        <a href="{{ path('app_behandeling',{name:behandelingobject.name}) }}" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

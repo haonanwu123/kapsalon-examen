@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Behandelingobject;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Form\RegisterType;
@@ -21,8 +22,8 @@ class KapsalonController extends AbstractController
             return $this->redirectToRoute('app_admin_home');
         }
 
-        if ($this->isGranted('ROLE_Klant')) {
-            return $this->redirectToRoute('app_kalnt_home');
+        if ($this->isGranted('ROLE_KLANT')) {
+            return $this->redirectToRoute('app_klant_home');
         }
 
         if ($this->isGranted('ROLE_KAPPER')) {
@@ -67,6 +68,27 @@ class KapsalonController extends AbstractController
 
         return $this->render('kapsalon/register.html.twig',[
             'form' => $form
+        ]);
+    }
+
+    #[Route('/behandelingobject', name: 'app_behandelingobject')]
+    public function app_behandelingobject(EntityManagerInterface $entityManager): Response
+    {
+        $behandelingobjects = $entityManager->getRepository(Behandelingobject::class)->findAll();
+
+        return $this->render('kapsalon/behandelingobject.html.twig',[
+            'behandelingobjects' => $behandelingobjects
+        ]);
+    }
+
+    #[Route('/behandeling/{name}', name: 'app_behandeling')]
+    public function app_behandeling(EntityManagerInterface $entityManager, string $name): Response
+    {
+        $boName = $entityManager->getRepository(Behandelingobject::class)->findOneBy(['name' => $name]);
+        $behandelings = $boName->getBehandelings();
+
+        return $this->render('kapsalon/behandeling.html.twig',[
+            'behandelings' => $behandelings
         ]);
     }
 }

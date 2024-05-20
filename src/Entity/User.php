@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +48,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateOfBirth = null;
+
+    /**
+     * @var Collection<int, Afspraak>
+     */
+    #[ORM\OneToMany(targetEntity: Afspraak::class, mappedBy: 'klant')]
+    private Collection $afspraaks;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Order $purchase = null;
+
+    public function __construct()
+    {
+        $this->afspraaks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -178,6 +195,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDateOfBirth(\DateTimeInterface $dateOfBirth): static
     {
         $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Afspraak>
+     */
+    public function getAfspraaks(): Collection
+    {
+        return $this->afspraaks;
+    }
+
+    public function addAfspraak(Afspraak $afspraak): static
+    {
+        if (!$this->afspraaks->contains($afspraak)) {
+            $this->afspraaks->add($afspraak);
+            $afspraak->setKlant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAfspraak(Afspraak $afspraak): static
+    {
+        if ($this->afspraaks->removeElement($afspraak)) {
+            // set the owning side to null (unless already changed)
+            if ($afspraak->getKlant() === $this) {
+                $afspraak->setKlant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPurchase(): ?Order
+    {
+        return $this->purchase;
+    }
+
+    public function setPurchase(?Order $purchase): static
+    {
+        $this->purchase = $purchase;
 
         return $this;
     }

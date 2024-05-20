@@ -23,7 +23,7 @@
     {% block navbar %}
         <nav class="navbar navbar-expand-lg background-olive-green mb-5">
             <div class="container-fluid">
-                <a class="navbar-brand text-light" href="{{ path('app_kapsalon') }}">Kapsalon <br> je haar zit goed</a>
+                <a class="navbar-brand text-light" href="{{ path('app_klant_home') }}">Kapsalon <br> je haar zit goed</a>
                 <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,22 +31,19 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_kapsalon') }}">Home</a>
+                            <a class="nav-link" href="{{ path('app_klant_home') }}">Home</a>
+                        </li>
+{#                        <li class="nav-item">#}
+{#                            <a class="nav-link" href="{{ path('app_product') }}">Product</a>#}
+{#                        </li>#}
+{#                        <li class="nav-item">#}
+{#                            <a class="nav-link" href="{{ path('app_behandelingobject') }}">Behandeling</a>#}
+{#                        </li>#}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_klant_contact') }}">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_product') }}">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_behandelingobject') }}">Behandeling</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_register') }}">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -54,22 +51,10 @@
         </nav>
     {% endblock %}
 
-    {% block kapsalon_home %}
+    {% block app_klant_home %}
     {% endblock %}
 
-    {% block kapsalon_product %}
-    {% endblock %}
-
-    {% block behandelingobject %}
-    {% endblock %}
-
-    {% block behandeling %}
-    {% endblock %}
-
-    {% block app_register %}
-    {% endblock %}
-
-    {% block app_login %}
+    {% block app_klant_contact %}
     {% endblock %}
 
     {% block footer %}

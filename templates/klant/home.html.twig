@@ -1,15 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'klantBase.html.twig' %}
 
 
-{% block kapsalon_home %}
+{% block app_klant_home %}
     <div class="container-fluid">
         <div class="row">
-            <h1>Welkom to kalnt home!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
+            <h1>Welkom to klant home!</h1>
+            <table class="table">
+                <tbody>
+                {% for getAfspraak in getAfspraaks %}
+                    <tr>
+                        <td>{{ getAfspraak.date | date('Y-m-d H:i:s') }}</td>
+                        <td>{{ getAfspraak.medewerker.fname }}</td>
+                        <td>{{ getAfspraak.description }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
