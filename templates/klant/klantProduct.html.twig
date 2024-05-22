@@ -1,0 +1,19 @@
+{% extends 'klantBase.html.twig' %}
+
+{% block app_klant_product %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for product in products %}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ asset(product.img) }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.price }}</p>
+                        <a href="{{ path('app_makeorder',{id:p.id}) }}" class="btn btn-primary">Order</a>
+                    </div>
+                </div>
+            {% endfor %}
+            <a class="btn btn-success" href="{{ path('show_winkelwagen') }}">winkelwagen</a>
+        </div>
+    </div>
+{% endblock %}

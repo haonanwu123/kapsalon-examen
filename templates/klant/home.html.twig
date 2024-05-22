@@ -10,12 +10,25 @@
                 {% for getAfspraak in getAfspraaks %}
                     <tr>
                         <td>{{ getAfspraak.date | date('Y-m-d H:i:s') }}</td>
-                        <td>{{ getAfspraak.medewerker.fname }}</td>
+                        <td>{{ getAfspraak.medewerker.lname }}</td>
                         <td>{{ getAfspraak.description }}</td>
+                        <td><a href="{{ path('app_klant_afspraak_update', {id:getAfspraak.id}) }}">update</a></td>
+                        <td><a href="{{ path('app_klant_afspraak_delete', {id:getAfspraak.id}) }}">delete</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            {% for msg in app.session.flashbag.get('warning') %}
+                <div class="alert alert-warning">
+                    <div class="text-center"> {{ msg }} </div>
+                </div>
+            {% endfor %}
+
+            {% for msg in app.session.flashbag.get('danger') %}
+                <div class="alert alert-warning">
+                    <div class="text-center"> {{ msg }} </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
