@@ -35,6 +35,9 @@ class Order
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'purchase')]
     private Collection $users;
 
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?User $klant = null;
+
     public function __construct()
     {
         $this->orderLines = new ArrayCollection();
@@ -126,6 +129,18 @@ class Order
                 $user->setPurchase(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getKlant(): ?User
+    {
+        return $this->klant;
+    }
+
+    public function setKlant(?User $klant): static
+    {
+        $this->klant = $klant;
 
         return $this;
     }

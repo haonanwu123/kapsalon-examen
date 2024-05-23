@@ -31,4 +31,24 @@
             {% endfor %}
         </div>
     </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table">
+                <tbody>
+                {% for order in orders %}
+                    {% for orderLine in orderLines[order.id] %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.klant.fname }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ orderLine.product.name }}</td>
+                            <td>{{ orderLine.amount }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

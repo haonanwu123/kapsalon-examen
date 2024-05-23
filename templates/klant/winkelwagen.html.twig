@@ -1,0 +1,19 @@
+{% extends 'klantBase.html.twig' %}
+
+{% block winkelwagen %}
+    {% for line in orderLines %}
+
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"> {{ line.product.name }}</h5>
+                <p class="card-text">  {{ line.product.price }}</p>
+                <h4>{{ line.amount }}</h4>
+            </div>
+        </div>
+
+    {% endfor %}
+    <a class="btn btn-danger" href="{{ path('clear_winkelwagen') }}">leeg winkelwagen</a>
+    <a class="btn btn-success" href="{{ path('order_winkelwagen')}}">bestel</a>
+
+{% endblock %}

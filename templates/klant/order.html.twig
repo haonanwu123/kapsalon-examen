@@ -1,0 +1,12 @@
+{% extends 'klantBase.html.twig' %}
+
+{% block order %}
+    <div class="card">
+        <img src="{{ asset(product.img) }}" class="card-img-top" alt="product">
+        <div class="card-body">
+            <h5 class="card-title"> {{ product.name }}</h5>
+            <p class="card-text">  {{ product.price }}</p>
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}
