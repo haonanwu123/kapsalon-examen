@@ -24,7 +24,7 @@ class KlantController extends AbstractController
         $klant = $this->getUser();
         $getAfspraaks = $entityManager->getRepository(Afspraak::class)->findBy(['klant' => $klant]);
 
-        $orders = $entityManager->getRepository(Order::class)->findBy(['id' => $klant]);
+        $orders = $entityManager->getRepository(Order::class)->findBy(['klant' => $klant]);
 
         $orderLines = [];
         foreach ($orders as $order) {
